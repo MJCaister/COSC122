@@ -86,7 +86,9 @@ class Stack(object):
     def push(self, item):
         """push a new item on to the stack"""
         # ---start student section---
-        pass
+        current = self.head
+        self.head = Node(item)
+        self.head.next_node = current
         # ===end student section===
 
     def pop(self):
@@ -96,7 +98,12 @@ class Stack(object):
         # use the following line to raise error when stack is empty
         # raise IndexError("Can't pop from empty stack.")
         # ---start student section---
-        pass
+        if self.is_empty():
+            raise IndexError(("Can't pop from empty stack."))
+        else:
+            popped = self.head.item
+            self.head = self.head.next_node
+            return popped
         # ===end student section===
 
     def peek(self):
@@ -107,19 +114,27 @@ class Stack(object):
             raise IndexError("Can't peek at empty stack.")
         else:
             # ---start student section---
-            pass
+            return self.head.item
             # ===end student section===
 
     def is_empty(self):
         """ Returns True if the stack is empty """
         # ---start student section---
-        pass
+        if self.head is None:
+            return True
+        else:
+            return False
         # ===end student section===
 
     def __len__(self):
         """ Returns the length --- calling len(s) will invoke this method """
         # ---start student section---
-        pass
+        counter = 0
+        next_node = self.head
+        while next_node is not None:
+            counter += 1
+            next_node = next_node.next_node
+        return counter
         # ===end student section===
 
     def __str__(self):
@@ -183,7 +198,14 @@ class Queue(object):
         so adding to the rear requires finding the end of the list
         """
         # ---start student section---
-        pass
+        if self.head is None:
+            self.head = Node(item)
+        else:
+            current = self.head
+            while current.next_node is not None:
+                current = current.next_node
+                
+            current.next_node = Node(item)
         # ===end student section===
 
     def dequeue(self):
@@ -193,19 +215,32 @@ class Queue(object):
         # use the following line to raise error when queue is empty
         # raise IndexError("Can't dequeue from empty queue.")
         # ---start student section---
-        pass
+        if self.is_empty():
+            raise IndexError("Can't dequeue from empty queue.")
+        else:
+            popped = self.head.item
+            self.head = self.head.next_node
+            return popped
         # ===end student section===
 
     def is_empty(self):
         """ returns True if the queue is empty """
         # ---start student section---
-        pass
+        if self.head == None:
+            return True
+        else:
+            return False
         # ===end student section===
 
     def __len__(self):
         """ Returns the length --- calling len(q) will invoke this method """
         # ---start student section---
-        pass
+        counter = 0
+        next_node = self.head
+        while next_node is not None:
+            counter += 1
+            next_node = next_node.next_node
+        return counter
         # ===end student section===
 
     def __str__(self):
